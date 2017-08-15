@@ -1,0 +1,25 @@
+{
+  "name": "peanuts_calendar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "malyon",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "compression": "^1.7.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "glob": "^7.1.2",
+    "google-auth-library": "^0.10.0",
+    "googleapis": "^20.1.0",
+    "jsonwebtoken": "^7.4.1",
+    "moment": "^2.18.1",
+    "nunjucks": "^3.0.1",
+    "promise": "^8.0.1",
+    "serve-favicon": "^2.4.3"
+  }
+}

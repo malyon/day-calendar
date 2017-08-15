@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Peanuts Day Calendar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/components/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/components/site.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/components/container.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/components/grid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/components/table.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/components/statistic.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <div class="page-wrap">
+      <div class="header" style="background: coral;">
+        <img id="main-logo" class="logo" src="/images/Peanuts_logo_2015-A.png" style="height: 15vh; min-height: 70px; padding: 4px;">
+      </div>
+      <div class="ui container">
+        <div class="ui equal width stackable grid">
+          <div class="column">
+            <div class="ui huge horizontal statistic">
+              <div class="value" id="date" style="font-size: 9rem!important;">
+
+              </div>
+              <div class="label">
+                <span id="day" style="display: block; font-size: 2em;">Wednesday</span>
+                <br>
+                <span id="month" style="display: block; font-size: 2em;">January</span>
+              </div>
+            </div>
+            <!-- div class="ui grid">
+              <div class="six wide column">
+                <span style="font-size: 6em;" id="date">10</span>
+              </div>
+              <div class="ten wide column">
+                <span id="day">Wednesday</span><br>
+                <span id="month">January</span>
+              </div>
+            </div -->
+            <!-- div id="date-format">
+              <span style="font-size: 2em; float: left;" id="date">10</span>
+              <span id="day">Wednesday</span>
+              <span id="month">January</span>
+            </div -->
+          </div>
+          <div class="column">
+            <table class="ui very basic compact table">
+              <tbody>
+                {% for event in events %}
+                <tr>
+                  <td>{{event.timeStr}}</td><td>{{ event.summary }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <footer class="site-footer">
+      <div style="text-align: center;">
+        <img itemprop="image" style="max-width: 100%;" id="comic-image" alt="Peanuts comic">
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/components/site.min.js"></script>
+    <script src="/js/moment.min.js"></script>
+    <script src="/js/index.js"></script>
+    <script>
+      var peanutsCal = new PeanutsCal.Home();
+      $(function() {
+        peanutsCal.init();
+      });
+    </script>
+  </body>
+  </html>
+<html>

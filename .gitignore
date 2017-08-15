@@ -1,0 +1,4 @@
+.idea/
+config/client_secret.json
+config/config.js
+node_modules/
