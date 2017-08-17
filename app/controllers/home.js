@@ -1,7 +1,8 @@
 var express = require('express'),
   router = express.Router();
-var config = require('../../config/config');
 var moment = require('moment');
+var logger = require('winston');
+var config = require('../../config/config');
 
 
 var google = require('googleapis'),
@@ -34,11 +35,11 @@ function getCalendarEvents(calendarId, auth)
     }, function(err, response) {
       if (err)
       {
-        console.log('Rejecting!!!!', err);
-        console.log('calendarId: ', calendarId);
+        logger.log('error', 'Rejecting calendar with id ' + calendarId + ': ', err);
         return reject(err);
       }
       var events = response.items;
+      logger.log('debug', calendarId + ' events: ', events);
       return resolve(events);
     });
   });
@@ -54,6 +55,7 @@ function getCalendars(auth)
       {
         return reject(err);
       }
+      logger.log('debug', 'Calendars: ', response.items);
       return resolve(response.items);
     });
   });
@@ -76,9 +78,14 @@ function getAllEvents(auth)
         {
           combinedEvents = combinedEvents.concat(allCalendarEvents[i]);
         }
+        logger.log('debug', 'Combined events: ', combinedEvents);
         return resolve(combinedEvents);
-      }, console.log);
-    }, console.log);
+      }, function(err) {
+        logger.log('error', 'Error getting all events: ' + err);
+      });
+    }, function(err) {
+      logger.log('error', 'Error getting calendars: ' + err);
+    });
   });
 }
 
@@ -98,7 +105,7 @@ router.get('/', function (req, res, next) {
   }
   catch(err)
   {
-    console.log(err);
+    logger.log('error', 'JWT not valid: ' + err);
   }
 
   getAllEvents(oauth2Client).then(function(combinedEvents) {
@@ -151,5 +158,7 @@ router.get('/', function (req, res, next) {
       var context = {};
       context.events = events;
       res.render('home.nks', context);
-    }).catch(console.log);
+    }).catch(function(err) {
+      logger.log('error', err);
+    });
 });

@@ -9,6 +9,7 @@ var nunjucks = require('nunjucks');
 var jwt = require('jsonwebtoken');
 var https = require('https');
 var config = require('./config');
+var logger = require('winston');
 
 var google = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
@@ -75,12 +76,13 @@ module.exports = function(app, config) {
               }
             });
             httpsRes.on('error', function(err) {
-              console.log(err);
+              logger.log('error', err);
             });
           });
         }
         else
         {
+          logger.log('debug', 'Redirecting to ' + googleAuthUrl);
           res.redirect(googleAuthUrl);
         }
       });

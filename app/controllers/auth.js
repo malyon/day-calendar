@@ -3,6 +3,7 @@ var express = require('express'),
   router = express.Router();
 var config = require('../../config/config');
 var jwt = require('jsonwebtoken');
+var logger = require('winston');
 
 var google = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
@@ -31,7 +32,7 @@ router.get('/', function (req, res, next) {
     }
     else
     {
-      console.log(err);
+      logger.log('error', err);
     }
   });
 });
