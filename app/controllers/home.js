@@ -1,6 +1,6 @@
 var express = require('express'),
   router = express.Router();
-var moment = require('moment');
+var moment = require('moment-timezone');
 var logger = require('winston');
 var config = require('../../config/config');
 
@@ -144,9 +144,8 @@ router.get('/', function (req, res, next) {
         if (combinedEvents[i].start.dateTime != null)
         {
           var format = 'h:mm A';
-          var start = moment(combinedEvents[i].start.dateTime);
-          var end = moment(combinedEvents[i].end.dateTime);
-
+          var start = moment.tz(combinedEvents[i].start.dateTime, "America/Chicago");
+          var end = moment.tz(combinedEvents[i].end.dateTime, "America/Chicago");
           event.timeStr = start.format('h:mm a') + ' - ' + end.format('h:mm a');
         }
         else
