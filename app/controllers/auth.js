@@ -19,6 +19,7 @@ module.exports = function (app) {
 
 
 router.get('/', function (req, res, next) {
+  logger.log('debug', 'Authenticating');
   var code = req.query.code;
 
   oauth2Client.getToken(code, function (err, tokens) {

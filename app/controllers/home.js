@@ -98,10 +98,12 @@ module.exports = function (app) {
 // TODO: Get the auth token from the jwt and make the calls to get the events,
 //  pass the events into the home route.
 router.get('/', function (req, res, next) {
+  logger.log('debug', 'Getting events...');
   try
   {
     var decode = jwt.verify(req.cookies.jwt, config.auth.jwtSecret);
     oauth2Client.setCredentials(decode.tokens);
+    logger.log('debug', 'verified');
   }
   catch(err)
   {
@@ -109,7 +111,8 @@ router.get('/', function (req, res, next) {
   }
 
   getAllEvents(oauth2Client).then(function(combinedEvents) {
-
+     
+     logger.log('debug', 'All events combined: ', combinedEvents);
      combinedEvents.sort(function (a, b) {
        if (a.start.dateTime == null)
        {
@@ -154,6 +157,7 @@ router.get('/', function (req, res, next) {
         }
         events.push(event);
       }
+      logger.log('debug', 'Rendering home.nks...');
       var context = {};
       context.events = events;
       res.render('home.nks', context);

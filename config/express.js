@@ -47,7 +47,7 @@ module.exports = function(app, config) {
   // Middleware for rerouting requests if google auth token not valid.
   app.use(function (req, res, next) {
 
-    if(req._parsedUrl.pathname === '/auth/google/callback')
+    if(req._parsedUrl.pathname === '/auth/google/callback' || req._parsedUrl.pathname === '/comic')
     {
       next();
     }
